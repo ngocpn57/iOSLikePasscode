@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="IOSPasscodeView">
+        <attr name="passcodeLength" format="integer" />
+        <attr name="enterPasscodeText" format="string" />
+        <attr name="deleteText" format="string" />
+        <attr name="cancelText" format="string" />
+    </declare-styleable>
+
+</resources>

@@ -1,0 +1,8 @@
+<resources>
+
+    <string name="app_name">IOSPasscode</string>
+
+    <string name="passcode_button_digit_font">HelveticaNeueThin.ttf</string>
+    <string name="passcode_button_alphabet_font">HelveticaNeueMedium.ttf</string>
+
+</resources>

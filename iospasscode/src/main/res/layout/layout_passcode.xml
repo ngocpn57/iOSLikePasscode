@@ -1,0 +1,116 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:parentTag="LinearLayout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/text_enter_passcode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="center_horizontal"
+        android:text="Enter passcode"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"/>
+
+    <LinearLayout
+        android:id="@+id/layout_passcode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="48dp"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/img_passcode_0"
+            style="@style/passcode"
+            android:src="@drawable/passcode"/>
+
+        <ImageView
+            android:id="@+id/img_passcode_1"
+            style="@style/passcode"
+            android:src="@drawable/passcode"/>
+
+        <ImageView
+            android:id="@+id/img_passcode_2"
+            style="@style/passcode"
+            android:src="@drawable/passcode"/>
+
+        <ImageView
+            android:id="@+id/img_passcode_3"
+            style="@style/passcode"
+            android:src="@drawable/passcode"/>
+
+    </LinearLayout>
+
+    <android.support.v7.widget.GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:columnCount="3">
+
+        <ImageView
+            android:id="@+id/button_passcode_1"
+            style="@style/passcode_button"
+            tools:src="@drawable/btn_passcode_normal_1" />
+
+        <ImageView
+            android:id="@+id/button_passcode_2"
+            style="@style/passcode_button"
+            tools:src="@drawable/btn_passcode_normal_2" />
+
+        <ImageView
+            android:id="@+id/button_passcode_3"
+            style="@style/passcode_button"
+            tools:src="@drawable/btn_passcode_normal_3" />
+
+        <ImageView
+            android:id="@+id/button_passcode_4"
+            style="@style/passcode_button"
+            tools:src="@drawable/btn_passcode_normal_4" />
+
+        <ImageView
+            android:id="@+id/button_passcode_5"
+            style="@style/passcode_button"
+            tools:src="@drawable/btn_passcode_normal_5" />
+
+        <ImageView
+            android:id="@+id/button_passcode_6"
+            style="@style/passcode_button"
+            tools:src="@drawable/btn_passcode_normal_6" />
+
+        <ImageView
+            android:id="@+id/button_passcode_7"
+            style="@style/passcode_button"
+            tools:src="@drawable/btn_passcode_normal_7" />
+
+        <ImageView
+            android:id="@+id/button_passcode_8"
+            style="@style/passcode_button"
+            tools:src="@drawable/btn_passcode_normal_8" />
+
+        <ImageView
+            android:id="@+id/button_passcode_9"
+            style="@style/passcode_button"
+            tools:src="@drawable/btn_passcode_normal_9" />
+
+        <ImageView
+            android:id="@+id/button_passcode_0"
+            style="@style/passcode_button"
+            app:layout_gravity="right"
+            app:layout_columnSpan="2"
+            tools:src="@drawable/btn_passcode_normal_0" />
+
+        <TextView
+            style="@style/passcode_button"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:text="Cancel"
+            android:id="@+id/text_delete"/>
+
+    </android.support.v7.widget.GridLayout>
+
+</merge>
