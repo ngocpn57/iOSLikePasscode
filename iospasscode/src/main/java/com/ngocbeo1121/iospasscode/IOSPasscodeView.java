@@ -10,6 +10,8 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -53,6 +55,7 @@ public class IOSPasscodeView extends LinearLayout {
     };*/
 
     TextView enterPasscodeTextView;
+    LinearLayout passcodeLayout;
     ImageView passcode0, passcode1, passcode2, passcode3;
     ImageView passcodeButton0, passcodeButton1, passcodeButton2, passcodeButton3, passcodeButton4, passcodeButton5, passcodeButton6, passcodeButton7, passcodeButton8, passcodeButton9;
     TextView deleteTextView;
@@ -65,6 +68,7 @@ public class IOSPasscodeView extends LinearLayout {
     String enterPasscodeText;
     String deleteText;
     String cancelText;
+    String correctPasscode;
 
     boolean isPasscodeEntered = false;
     StringBuilder passcodeBuilder;
@@ -94,13 +98,13 @@ public class IOSPasscodeView extends LinearLayout {
             a.recycle();
         }
 
-        if (TextUtils.isEmpty(enterPasscodeText)){
+        if (enterPasscodeText == null){
             enterPasscodeText = DEFAULT_PASSCODE_TEXT;
         }
-        if (TextUtils.isEmpty(deleteText)){
+        if (deleteText == null){
             deleteText = DEFAULT_DELETE_TEXT;
         }
-        if (TextUtils.isEmpty(cancelText)){
+        if (cancelText == null){
             cancelText = DEFAULT_CANCEL_TEXT;
         }
 
@@ -116,10 +120,12 @@ public class IOSPasscodeView extends LinearLayout {
 
         enterPasscodeTextView = (TextView) findViewById(R.id.text_enter_passcode);
 
-        passcode0 = (ImageView) findViewById(R.id.img_passcode_0);
-        passcode1 = (ImageView) findViewById(R.id.img_passcode_1);
-        passcode2 = (ImageView) findViewById(R.id.img_passcode_2);
-        passcode3 = (ImageView) findViewById(R.id.img_passcode_3);
+        passcodeLayout = (LinearLayout) findViewById(R.id.layout_passcode);
+
+        passcode0 = (ImageView) passcodeLayout.findViewById(R.id.img_passcode_0);
+        passcode1 = (ImageView) passcodeLayout.findViewById(R.id.img_passcode_1);
+        passcode2 = (ImageView) passcodeLayout.findViewById(R.id.img_passcode_2);
+        passcode3 = (ImageView) passcodeLayout.findViewById(R.id.img_passcode_3);
 
         passcodeButton0 = (ImageView) findViewById(R.id.button_passcode_0);
         passcodeButton1 = (ImageView) findViewById(R.id.button_passcode_1);
@@ -237,6 +243,7 @@ public class IOSPasscodeView extends LinearLayout {
         }
     }
 
+
     void appendPasscodeDigit(int digit){
         boolean appended = false;
         if (passcodeBuilder.length() < DEFAULT_PASSCODE_LENGTH) {
@@ -249,6 +256,7 @@ public class IOSPasscodeView extends LinearLayout {
             callback.onDigit(this, digit, appended);
         }
     }
+
 
     void deletePasscodeChar(){
         if (passcodeBuilder.length() > 0){
@@ -267,12 +275,41 @@ public class IOSPasscodeView extends LinearLayout {
         isPasscodeEntered = false;
     }
 
+
     void onPasscodeEntered(){
         String passcode = passcodeBuilder.toString();
+        boolean isCorrect = false;
+        if (!TextUtils.isEmpty(correctPasscode)){
+            if (!passcode.equals(correctPasscode)){
+                postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        clearAndShakePasscodeLayout();
+                    }
+                }, 150);
+            }
+            else {
+                isCorrect = true;
+            }
+        }
         if (callback != null){
-            callback.onCompleted(this, true);
+            callback.onCompleted(this, isCorrect);
         }
     }
+
+
+    void clearAndShakePasscodeLayout(){
+        Animation shakeAnim = AnimationUtils.loadAnimation(getContext(), R.anim.incorrect_shake);
+        passcodeLayout.startAnimation(shakeAnim);
+
+        postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                setPasscode(null);
+            }
+        }, 100);
+    }
+
 
     void updateUI(){
         int length = passcodeBuilder.length();
@@ -303,6 +340,19 @@ public class IOSPasscodeView extends LinearLayout {
         return passcodeBuilder.toString();
     }
 
+    public void setPasscode(String passcode){
+        passcodeBuilder.delete(0, passcodeBuilder.length());
+        if (passcode != null){
+            passcodeBuilder.append(passcode);
+        }
+        updateUI();
+    }
+
+    public void setCorrectPasscode(String correctPasscode){
+        this.correctPasscode = correctPasscode;
+    }
+
+
     public String getEnterPasscodeText() {
         return enterPasscodeText;
     }
@@ -311,6 +361,7 @@ public class IOSPasscodeView extends LinearLayout {
         this.enterPasscodeText = enterPasscodeText;
         enterPasscodeTextView.setText(enterPasscodeText);
     }
+
 
     public String getDeleteText() {
         return deleteText;
@@ -321,6 +372,7 @@ public class IOSPasscodeView extends LinearLayout {
         updateUI();
     }
 
+
     public String getCancelText() {
         return cancelText;
     }
@@ -329,4 +381,5 @@ public class IOSPasscodeView extends LinearLayout {
         this.cancelText = cancelText;
         updateUI();
     }
+
 }
