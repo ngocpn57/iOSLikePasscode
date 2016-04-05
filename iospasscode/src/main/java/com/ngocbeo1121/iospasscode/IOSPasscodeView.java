@@ -69,7 +69,6 @@ public class IOSPasscodeView extends LinearLayout {
     String enterPasscodeText;
     String deleteText;
     String cancelText;
-    String correctPasscode;
 
     boolean isPasscodeEntered = false;
     StringBuilder passcodeBuilder;
@@ -278,10 +277,8 @@ public class IOSPasscodeView extends LinearLayout {
 
 
     void onPasscodeEntered(){
-        String passcode = passcodeBuilder.toString();
-        boolean isCorrect = false;
-        if (!TextUtils.isEmpty(correctPasscode)){
-            if (!passcode.equals(correctPasscode)){
+        if (callback != null){
+            if (!callback.onCompleted(this)){
                 postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -289,12 +286,6 @@ public class IOSPasscodeView extends LinearLayout {
                     }
                 }, 150);
             }
-            else {
-                isCorrect = true;
-            }
-        }
-        if (callback != null){
-            callback.onCompleted(this, isCorrect);
         }
     }
 
@@ -352,8 +343,8 @@ public class IOSPasscodeView extends LinearLayout {
         updateUI();
     }
 
-    public void setCorrectPasscode(String correctPasscode){
-        this.correctPasscode = correctPasscode;
+    public void clearPasscode(){
+        setPasscode(null);
     }
 
 

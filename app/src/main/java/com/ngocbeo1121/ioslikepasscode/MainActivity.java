@@ -29,11 +29,12 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        passcodeView.setCorrectPasscode("1234");
         passcodeView.setCallback(new IOSPasscodeViewCallback() {
             @Override
-            public void onCompleted(final IOSPasscodeView passcodeView, boolean isCorrect) {
+            public boolean onCompleted(final IOSPasscodeView passcodeView) {
+                boolean isCorrect = passcodeView.getPasscode().equals("1234");
                 Toast.makeText(MainActivity.this, "passcode: " + passcodeView.getPasscode() + ", isCorrect = " + isCorrect, Toast.LENGTH_SHORT).show();
+                return isCorrect;
             }
 
             @Override
