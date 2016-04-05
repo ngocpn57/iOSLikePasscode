@@ -1,5 +1,7 @@
 package com.ngocbeo1121.iospasscode;
 
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
@@ -10,8 +12,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -299,15 +300,18 @@ public class IOSPasscodeView extends LinearLayout {
 
 
     void clearAndShakePasscodeLayout(){
-        Animation shakeAnim = AnimationUtils.loadAnimation(getContext(), R.anim.incorrect_shake);
-        passcodeLayout.startAnimation(shakeAnim);
+        AnimatorSet animatorSet = (AnimatorSet) AnimatorInflater.loadAnimator(getContext(), R.animator.incorrect_shake);
+        animatorSet.setInterpolator(new AccelerateDecelerateInterpolator());
+        animatorSet.setTarget(passcodeLayout);
+        animatorSet.start();
 
         postDelayed(new Runnable() {
             @Override
             public void run() {
                 setPasscode(null);
             }
-        }, 100);
+        }, 280);
+
     }
 
 

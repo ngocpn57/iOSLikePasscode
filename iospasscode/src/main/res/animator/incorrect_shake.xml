@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:ordering="sequentially">
+
+    <objectAnimator
+        android:propertyName="translationX"
+        android:valueFrom="0dp"
+        android:valueTo="-20dp"
+        android:duration="40" />
+
+    <objectAnimator
+        android:propertyName="translationX"
+        android:valueFrom="-20dp"
+        android:valueTo="20dp"
+        android:duration="80"
+        android:repeatCount="4"
+        android:repeatMode="reverse"/>
+
+    <objectAnimator
+        android:propertyName="translationX"
+        android:valueFrom="20dp"
+        android:valueTo="0dp"
+        android:duration="40" />
+
+</set>
