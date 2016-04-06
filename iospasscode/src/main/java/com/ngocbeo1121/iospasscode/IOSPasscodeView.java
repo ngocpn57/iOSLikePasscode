@@ -296,7 +296,7 @@ public class IOSPasscodeView extends LinearLayout {
     }
 
 
-    void clearAndShakePasscodeLayout(){
+    public void clearAndShakePasscodeLayout(){
         AnimatorSet animatorSet = (AnimatorSet) AnimatorInflater.loadAnimator(getContext(), R.animator.incorrect_shake);
         animatorSet.setInterpolator(new AccelerateDecelerateInterpolator());
         animatorSet.setTarget(passcodeLayout);
@@ -388,4 +388,21 @@ public class IOSPasscodeView extends LinearLayout {
         updateUI();
     }
 
+
+    public boolean isVibrateOnIncorrect(){
+        return vibrateOnIncorrect;
+    }
+
+    public void setVibrateOnIncorrect(boolean vibrateOnIncorrect){
+        this.vibrateOnIncorrect = vibrateOnIncorrect;
+    }
+
+    
+    public int getVibrateDuration() {
+        return vibrateDuration;
+    }
+
+    public void setVibrateDuration(int vibrateDuration) {
+        this.vibrateDuration = vibrateDuration;
+    }
 }
