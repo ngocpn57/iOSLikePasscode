@@ -168,6 +168,7 @@ public class IOSPasscodeView extends LinearLayout {
 
         // Enter passcode text
         enterPasscodeTextView.setText(enterPasscodeText);
+        deleteTextView.setText(cancelText);
 
         // Passcode buttons handle touch
         for (int i = 0; i < 10; i++){
