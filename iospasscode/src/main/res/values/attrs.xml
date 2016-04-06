@@ -6,6 +6,8 @@
         <attr name="enterPasscodeText" format="string" />
         <attr name="deleteText" format="string" />
         <attr name="cancelText" format="string" />
+        <attr name="vibrateOnIncorrect" format="boolean" />
+        <attr name="vibrateDuration" format="integer" />
     </declare-styleable>
 
 </resources>

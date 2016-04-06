@@ -9,7 +9,12 @@
         android:id="@+id/passcodeView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        app:deleteText="Delete"
+        app:cancelText="Cancel"
+        app:enterPasscodeText="Enter Passcode"
+        app:vibrateOnIncorrect="true"
+        app:vibrateDuration="450" >
 
     </com.ngocbeo1121.iospasscode.IOSPasscodeView>
 

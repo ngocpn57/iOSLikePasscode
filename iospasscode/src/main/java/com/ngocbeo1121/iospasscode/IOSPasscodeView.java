@@ -6,8 +6,8 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
+import android.os.Vibrator;
 import android.support.v4.content.ContextCompat;
-import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -28,6 +28,8 @@ public class IOSPasscodeView extends LinearLayout {
     public static final String DEFAULT_PASSCODE_TEXT = "Enter passcode";
     public static final String DEFAULT_CANCEL_TEXT = "Cancel";
     public static final String DEFAULT_DELETE_TEXT = "Delete";
+    public static final boolean DEFAULT_VIBRATE_ENABLED = false;
+    public static final int DEFAULT_VIBRATE_DURATION = 500;
 
     public static final int[] PASSCODE_BUTTON_STATE_NORMAL_RESOURCES = {
             R.drawable.btn_passcode_normal_0,
@@ -69,6 +71,8 @@ public class IOSPasscodeView extends LinearLayout {
     String enterPasscodeText;
     String deleteText;
     String cancelText;
+    boolean vibrateOnIncorrect;
+    int vibrateDuration;
 
     boolean isPasscodeEntered = false;
     StringBuilder passcodeBuilder;
@@ -90,10 +94,12 @@ public class IOSPasscodeView extends LinearLayout {
                 0, 0);
 
         try {
-            passcodeLength = a.getInt(R.styleable.IOSPasscodeView_passcodeLength, 4);
+            passcodeLength = a.getInt(R.styleable.IOSPasscodeView_passcodeLength, DEFAULT_PASSCODE_LENGTH);
             enterPasscodeText = a.getString(R.styleable.IOSPasscodeView_enterPasscodeText);
             deleteText = a.getString(R.styleable.IOSPasscodeView_deleteText);
             cancelText = a.getString(R.styleable.IOSPasscodeView_cancelText);
+            vibrateOnIncorrect = a.getBoolean(R.styleable.IOSPasscodeView_vibrateOnIncorrect, DEFAULT_VIBRATE_ENABLED);
+            vibrateDuration = a.getInt(R.styleable.IOSPasscodeView_vibrateDuration, DEFAULT_VIBRATE_DURATION);
         } finally {
             a.recycle();
         }
@@ -295,6 +301,11 @@ public class IOSPasscodeView extends LinearLayout {
         animatorSet.setInterpolator(new AccelerateDecelerateInterpolator());
         animatorSet.setTarget(passcodeLayout);
         animatorSet.start();
+
+        if (vibrateOnIncorrect) {
+            Vibrator vibrator = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
+            vibrator.vibrate(vibrateDuration);
+        }
 
         postDelayed(new Runnable() {
             @Override
