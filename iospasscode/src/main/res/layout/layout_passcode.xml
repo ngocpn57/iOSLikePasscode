@@ -1,5 +1,4 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:parentTag="LinearLayout"
     android:layout_width="wrap_content"
@@ -46,10 +45,10 @@
 
     </LinearLayout>
 
-    <android.support.v7.widget.GridLayout
+    <GridLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:columnCount="3">
+        android:columnCount="3">
 
         <ImageView
             android:id="@+id/button_passcode_1"
@@ -99,8 +98,8 @@
         <ImageView
             android:id="@+id/button_passcode_0"
             style="@style/passcode_button"
-            app:layout_gravity="right"
-            app:layout_columnSpan="2"
+            android:layout_gravity="right"
+            android:layout_columnSpan="2"
             tools:src="@drawable/btn_passcode_normal_0" />
 
         <TextView
@@ -111,6 +110,6 @@
             android:text="Cancel"
             android:id="@+id/text_delete"/>
 
-    </android.support.v7.widget.GridLayout>
+    </GridLayout>
 
 </merge>

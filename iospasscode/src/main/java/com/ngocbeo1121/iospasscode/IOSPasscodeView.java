@@ -7,7 +7,6 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.os.Vibrator;
-import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -155,10 +154,10 @@ public class IOSPasscodeView extends LinearLayout {
         passcodeButtonImageViews = new ImageView[]{ passcodeButton0, passcodeButton1, passcodeButton2, passcodeButton3, passcodeButton4, passcodeButton5, passcodeButton6, passcodeButton7, passcodeButton8, passcodeButton9 };
 
         passcodeButtonDrawables = new TransitionDrawable[10];
-        final Drawable pressedDrawable = ContextCompat.getDrawable(getContext(), R.drawable.btn_passcode_pressed);
+        final Drawable pressedDrawable = getResources().getDrawable(R.drawable.btn_passcode_pressed);
         for (int i = 0; i < 10; i++){
             TransitionDrawable drawable = new TransitionDrawable(new Drawable[]{
-                    ContextCompat.getDrawable(getContext(), PASSCODE_BUTTON_STATE_NORMAL_RESOURCES[i]),
+                    getResources().getDrawable(PASSCODE_BUTTON_STATE_NORMAL_RESOURCES[i]),
                     pressedDrawable
             });
 

@@ -8,9 +8,6 @@ import android.widget.Toast;
 import com.ngocbeo1121.iospasscode.IOSPasscodeView;
 import com.ngocbeo1121.iospasscode.IOSPasscodeViewCallback;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
 
 /**
  * Created by ngocbeo1121 on 3/28/16.
@@ -19,7 +16,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "MainActivity";
 
-    @Bind(R.id.passcodeView)
     IOSPasscodeView passcodeView;
 
     @Override
@@ -27,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ButterKnife.bind(this);
+        passcodeView = (IOSPasscodeView) findViewById(R.id.passcodeView);
 
         passcodeView.setCallback(new IOSPasscodeViewCallback() {
             @Override
